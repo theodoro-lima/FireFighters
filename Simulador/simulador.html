@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador financeiro</title>
+</head>
+<body style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; background-image: url(tarde.png);">
+<center>
+   <img src="LogoFF.png" alt="logo da empresa" style="width: 250px;"> 
+   <br><br>
+   Número de incêndios no último mês: <input id="incendios_mes" placeholder="Digite aqui...">
+   <br><br>
+   Número de hectares queimados: <input id="numero_hectar_queimado" placeholder="Digite aqui...">
+   <br><br>
+   Número total de hectares: <input id="numero_total_hectar" placeholder="Digite aqui...">
+   <br><br>
+   <button onclick="calculo()" style="border-radius: 10px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Calcular prejuízo</button>
+   <br><br>
+   <div id="resultado" style="font-size: 20px;"></div>
+</center>
+
+    <div id="barra" ></div>
+
+    
+
+</body>
+</html>
+
+<script>
+
+    function calculo() {
+
+        var mes = Number(incendios_mes.value);
+        var hectar_queimado = Number(numero_hectar_queimado.value);
+        var hectar_total = Number(numero_total_hectar.value)
+        var valor_incendio = Number(565); // Valor baseado nos incêndios do Mato Grosso 
+        var gasto_mes = Number(valor_incendio*mes);
+        var gasto_dia = Number(gasto_mes/30);
+        var porcentagem_perdida = Number (hectar_queimado*100/hectar_total);
+        var porcentagem_restante = Number (100-porcentagem_perdida);
+    
+        resultado.innerHTML = `O número de incêndios no último mês foi de ${mes}, resultando em um gasto de R$${(gasto_mes).toFixed(2)} por mês, e um gasto de R$${(gasto_dia).toFixed(2)} por dia. <br>
+        O incêndio consumiu ${(porcentagem_perdida).toFixed(2)}% do hectar total, restando ${(porcentagem_restante).toFixed(2)}% 
+        <br>`
+
+        barra.innerHTML = `
+        <br>
+        <div style="height: 100px; width: 100%; "> 
+        <div style="height: 50%; width: ${porcentagem_perdida}%; float: left; border-radius: 5px; background-color: orangered;"></div>
+        <div style="height: 50%; width: ${porcentagem_restante}%; float: left; border-radius: 5px; background-color: silver;"></div>
+        </div> <br>`
+
+        rgb(233, 229, 14)
+    }
+
+</script>
